@@ -1,0 +1,24 @@
+version: '3.11'
+
+services:
+  detection-service:
+    build: ./detection-service
+    container_name: detection-service
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+  classification-service:
+    build: ./classification-service
+    container_name: classification-service
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+  web-interface:
+    build: ./web-interface
+    container_name: web-interface
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mount thư mục data để lưu feedback
+      - ./data:/app/data
+    depends_on:
+      - detection-service
+      - classification-service
