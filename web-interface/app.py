@@ -84,7 +84,6 @@ if uploaded_file is not None:
             st.error(f"Không thể kết nối đến detection service: {e}")
             time.sleep(2)
 
-
         # Hiển thị frame đã xử lý
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         FRAME_WINDOW.image(frame_rgb)
